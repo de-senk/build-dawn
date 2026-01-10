@@ -85,10 +85,10 @@ cmake.exe                                     ^
   -D DAWN_BUILD_SAMPLES=OFF                   ^
   -D DAWN_BUILD_TESTS=OFF                     ^
   -D DAWN_ENABLE_D3D12=ON                     ^
-  -D DAWN_ENABLE_D3D11=OFF                    ^
+  -D DAWN_ENABLE_D3D11=ON                    ^
   -D DAWN_ENABLE_NULL=OFF                     ^
-  -D DAWN_ENABLE_DESKTOP_GL=OFF               ^
-  -D DAWN_ENABLE_OPENGLES=OFF                 ^
+  -D DAWN_ENABLE_DESKTOP_GL=ON               ^
+  -D DAWN_ENABLE_OPENGLES=ON                 ^
   -D DAWN_ENABLE_VULKAN=OFF                   ^
   -D DAWN_USE_GLFW=OFF                        ^
   -D DAWN_ENABLE_SPIRV_VALIDATION=OFF         ^
