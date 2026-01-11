@@ -87,13 +87,13 @@ cmake.exe                                     ^
   -D DAWN_ENABLE_D3D12=OFF                     ^
   -D DAWN_ENABLE_D3D11=ON                    ^
   -D DAWN_ENABLE_NULL=OFF                     ^
-  -D DAWN_ENABLE_DESKTOP_GL=ON               ^
+  -D DAWN_ENABLE_DESKTOP_GL=OFF               ^
   -D DAWN_ENABLE_OPENGLES=ON                 ^
   -D DAWN_ENABLE_VULKAN=OFF                   ^
   -D DAWN_USE_GLFW=OFF                        ^
   -D DAWN_ENABLE_SPIRV_VALIDATION=OFF         ^
   -D DAWN_DXC_ENABLE_ASSERTS_IN_NDEBUG=OFF    ^
-  -D DAWN_USE_BUILT_DXC=OFF                    ^
+  -D DAWN_USE_BUILT_DXC=ON                    ^
   -D DAWN_FETCH_DEPENDENCIES=OFF              ^
   -D DAWN_BUILD_MONOLITHIC_LIBRARY=SHARED     ^
   -D TINT_BUILD_TESTS=OFF                     ^
