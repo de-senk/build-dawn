@@ -84,7 +84,7 @@ cmake.exe                                     ^
   -D ABSL_MSVC_STATIC_RUNTIME=ON              ^
   -D DAWN_BUILD_SAMPLES=OFF                   ^
   -D DAWN_BUILD_TESTS=OFF                     ^
-  -D DAWN_ENABLE_D3D12=ON                     ^
+  -D DAWN_ENABLE_D3D12=OFF                     ^
   -D DAWN_ENABLE_D3D11=ON                    ^
   -D DAWN_ENABLE_NULL=OFF                     ^
   -D DAWN_ENABLE_DESKTOP_GL=ON               ^
@@ -93,7 +93,7 @@ cmake.exe                                     ^
   -D DAWN_USE_GLFW=OFF                        ^
   -D DAWN_ENABLE_SPIRV_VALIDATION=OFF         ^
   -D DAWN_DXC_ENABLE_ASSERTS_IN_NDEBUG=OFF    ^
-  -D DAWN_USE_BUILT_DXC=ON                    ^
+  -D DAWN_USE_BUILT_DXC=OFF                    ^
   -D DAWN_FETCH_DEPENDENCIES=OFF              ^
   -D DAWN_BUILD_MONOLITHIC_LIBRARY=SHARED     ^
   -D TINT_BUILD_TESTS=OFF                     ^
