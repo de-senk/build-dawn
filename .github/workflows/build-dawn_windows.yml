@@ -3,9 +3,6 @@ name: build-dawn
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
 
 jobs:
   info:
