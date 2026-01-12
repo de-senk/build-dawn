@@ -42,7 +42,7 @@ jobs:
             libxcursor-dev \
             libxi-dev \
             libvulkan-dev \
-            vulkan-validationlayers-dev \
+            vulkan-utility-libraries-dev \
             spirv-tools
       
       - name: Run Build Script
