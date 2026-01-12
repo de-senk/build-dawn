@@ -1,0 +1,82 @@
+name: build-dawn-linux
+on:
+  workflow_dispatch:
+jobs:
+  info:
+    runs-on: ubuntu-24.04
+    outputs:
+      DAWN_COMMIT: ${{ steps.info.outputs.DAWN_COMMIT }}
+      BUILD_DATE: ${{ steps.info.outputs.BUILD_DATE }}
+    steps:
+      - name: Get Latest Commit Id
+        id: info
+        run: |
+          echo DAWN_COMMIT=$(git ls-remote https://dawn.googlesource.com/dawn HEAD | awk '{ print $1 }') >> ${GITHUB_OUTPUT}
+          echo BUILD_DATE=$(date +'%Y-%m-%d') >> ${GITHUB_OUTPUT}
+      
+  build:
+    runs-on: ubuntu-24.04
+    needs: info
+    strategy:
+      matrix:
+        arch: [x64]
+    env:
+      DAWN_COMMIT: ${{ needs.info.outputs.DAWN_COMMIT }}
+      BUILD_DATE: ${{ needs.info.outputs.BUILD_DATE }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Install Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            build-essential \
+            cmake \
+            ninja-build \
+            python3 \
+            python3-pip \
+            libx11-dev \
+            libxrandr-dev \
+            libxinerama-dev \
+            libxcursor-dev \
+            libxi-dev \
+            libvulkan-dev \
+            vulkan-validationlayers-dev \
+            spirv-tools
+      
+      - name: Run Build Script
+        id: build
+        run: |
+          chmod +x build.sh
+          ./build.sh ${{ matrix.arch }}
+      
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: dawn-linux-${{ matrix.arch }}-${{ needs.info.outputs.BUILD_DATE }}
+          path: dawn-${{ matrix.arch }}-${{ needs.info.outputs.BUILD_DATE }}.tar.gz
+          if-no-files-found: error
+          compression-level: 0
+          
+  release:
+    runs-on: ubuntu-24.04
+    needs: [info, build]
+    permissions:
+      contents: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Create GitHub Release
+        run: |
+          echo '[dawn commit](https://dawn.googlesource.com/dawn/+/${{ needs.info.outputs.DAWN_COMMIT }})' >>notes.txt
+          gh release create ${{ needs.info.outputs.BUILD_DATE }}-linux -R "${GITHUB_REPOSITORY}" -t '${{ needs.info.outputs.BUILD_DATE }} Linux' -F notes.txt || true
+      
+      - name: Get Artifacts From Build Steps
+        uses: actions/download-artifact@v4
+        with:
+          pattern: dawn-linux-*-${{ needs.info.outputs.BUILD_DATE }}
+          merge-multiple: true
+      
+      - name: Upload Artifacts to GitHub Release
+        run: gh release upload '${{ needs.info.outputs.BUILD_DATE }}-linux' dawn-*-${{ needs.info.outputs.BUILD_DATE }}.tar.gz -R "${GITHUB_REPOSITORY}"
