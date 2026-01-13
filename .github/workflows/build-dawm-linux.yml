@@ -40,6 +40,9 @@ jobs:
             libx11-xcb-dev \
             libxcb1-dev \
             libxrandr-dev \
+            mesa-common-dev \
+            nodejs \
+            npm \
             libxinerama-dev \
             libxcursor-dev \
             libxi-dev \
