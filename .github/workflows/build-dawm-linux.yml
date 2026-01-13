@@ -45,8 +45,12 @@ jobs:
             npm \
             libxinerama-dev \
             libxcursor-dev \
+            llvm-dev \
+            libedit-dev \
             libxi-dev \
             libvulkan-dev \
+            zlib1g-dev \
+            libclang-dev \
             vulkan-utility-libraries-dev \
             spirv-tools  \
             pkg-config \
