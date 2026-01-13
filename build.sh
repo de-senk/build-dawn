@@ -86,7 +86,7 @@ cmake --build "dawn.build-${TARGET_ARCH}" --config Release --target webgpu_dawn 
 mkdir -p "dawn-${TARGET_ARCH}"
 echo "$DAWN_COMMIT" > "dawn-${TARGET_ARCH}/commit.txt"
 cp "dawn.build-${TARGET_ARCH}/gen/include/dawn/webgpu.h" "dawn-${TARGET_ARCH}/" || exit 1
-cp "dawn.build-${TARGET_ARCH}/libwebgpu_dawn.so" "dawn-${TARGET_ARCH}/" || exit 1
+cp "dawn.build-${TARGET_ARCH}/src/dawn/native/libwebgpu_dawn.so" "dawn-${TARGET_ARCH}/" || exit 1
 cp "dawn.build-${TARGET_ARCH}/tint" "dawn-${TARGET_ARCH}/" || exit 1
 
 # Done!
